@@ -32,6 +32,8 @@ jobs:
       - run: npm run build
       - run: npm run check
       - run: npm run lint
+      # prints the CV PDFs into build/cv/ with the runner's Chrome
+      - run: node scripts/build-cv.mjs
       - uses: actions/upload-pages-artifact@v5
         with:
           path: build

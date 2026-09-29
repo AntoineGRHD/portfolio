@@ -6,27 +6,13 @@
 	import HomeNav from "$lib/components/home-nav.svelte";
 	import PersonalProjects from "$lib/components/personal-projects.svelte";
 	import PreviousExperiences from "$lib/components/previous-experiences.svelte";
-	import { compareProjects, occupations, type EnrichedProject } from "$data/experiences";
+	import { currentExperience, education, internships, personalProjects } from "$data/sections";
 	import { m } from "$codegen/paraglide/messages.js";
 	import { baseLocale, getLocale, locales } from "$codegen/paraglide/runtime.js";
 	import { pageUrl, siteUrl } from "$lib/site";
 	import type { PageProps } from "./$types";
 
 	let { data }: PageProps = $props();
-
-	const experiences = occupations.filter((occupation) => occupation.type === "Experience");
-	const currentExperience =
-		[...experiences].sort((a, b) => b.startYear - a.startYear)[0] ?? occupations[occupations.length - 1];
-	const allProjects: EnrichedProject[] = occupations.flatMap((occupation) =>
-		occupation.projects.map((project) => ({ ...project, parentOccupation: occupation }))
-	);
-	const internships = allProjects.filter((project) => project.kind === "internship").sort(compareProjects);
-	const education = occupations
-		.filter((occupation) =>
-			occupation.type === "Formation" && !occupation.projects.some((project) => project.kind === "personal")
-		)
-		.sort((a, b) => b.startYear - a.startYear);
-	const personalProjects = allProjects.filter((project) => project.kind === "personal").sort(compareProjects);
 
 	const ogLocales = { en: "en_US", fr: "fr_FR" } as const;
 	const locale = getLocale();

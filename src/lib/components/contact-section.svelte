@@ -2,10 +2,13 @@
 	import { onDestroy } from "svelte";
 	import Check from "@lucide/svelte/icons/check";
 	import Copy from "@lucide/svelte/icons/copy";
+	import FileText from "@lucide/svelte/icons/file-text";
 	import Mail from "@lucide/svelte/icons/mail";
 	import MapPin from "@lucide/svelte/icons/map-pin";
 	import { m } from "$codegen/paraglide/messages.js";
+	import { getLocale } from "$codegen/paraglide/runtime.js";
 	import { decodeEmail } from "$lib/email-obfuscation";
+	import { cvPath } from "$lib/site";
 	import SectionMarker from "$lib/components/section-marker.svelte";
 
 	type EmailPart = {
@@ -116,6 +119,15 @@
 					<span>{m.contact_reveal()}</span>
 				</button>
 			{/if}
+
+			<!-- eslint-disable svelte/no-navigation-without-resolve -- static files generated at deploy, not routes -->
+			<p class="mail-line">
+				<FileText size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
+				<a class="cv-link" href={cvPath(getLocale(), "light")}>{m.cv_download()}</a>
+				<span class="line-divider" aria-hidden="true"></span>
+				<a class="cv-alt" href={cvPath(getLocale(), "dark")}>{m.cv_download_dark()}</a>
+			</p>
+			<!-- eslint-enable svelte/no-navigation-without-resolve -->
 
 			<p class="location">
 				<MapPin size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
@@ -249,6 +261,35 @@
 		&:focus-visible {
 			outline: 2px solid rgba(238, 140, 15, 0.35);
 			outline-offset: 3px;
+		}
+	}
+
+	/* the download reads as the main action; the dark twin stays secondary */
+	.cv-link,
+	.cv-alt {
+		text-decoration: none;
+		transition: color 0.2s ease;
+
+		&:focus-visible {
+			outline: 2px solid rgba(238, 140, 15, 0.35);
+			outline-offset: 3px;
+		}
+	}
+
+	.cv-link {
+		color: var(--accent-orange-light);
+
+		&:hover {
+			color: var(--accent-orange);
+		}
+	}
+
+	.cv-alt {
+		color: rgba(255, 255, 255, 0.5);
+		font-size: var(--fs-small);
+
+		&:hover {
+			color: white;
 		}
 	}
 

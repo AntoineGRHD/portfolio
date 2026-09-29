@@ -389,8 +389,8 @@ export const occupations: Occupation[] = [
 				},
 				kind: "professional",
 				description: {
-					fr: "Montée en charge des traitements backend de ~10 000 à ~400 000 événements par jour en production, sur 2 vCPU et 4 à 8 Go de RAM, avec des tests de charge validant l'objectif d'un million par jour. Remplacement des requêtes N+1 et des accès répétés à la base par du batching et de la mise en cache, faisant passer le temps de traitement de 150–300 ms à environ 12 ms par événement, avec un traitement par lots de 100.",
-					en: "Scaled backend processing from ~10,000 to ~400,000 events per day in production on 2 vCPUs and 4–8 GB of RAM, and load-tested it for a one-million-per-day requirement. Replaced N+1 queries and repeated database access with batching and caching, cutting processing time from 150–300 ms to roughly 12 ms per event, processed in batches of 100.",
+					fr: "Montée en charge des traitements backend de ~10 000 à ~400 000 événements par jour en production, sur 2 vCPU et 4 à 8 Go de RAM, avec des tests de charge validant l'objectif d'un million par jour. Remplacement des requêtes N+1 et des accès répétés à la base par du batching et de la mise en cache, faisant passer le temps de traitement de 150–300 ms à environ 12 ms par événement.",
+					en: "Scaled backend processing from ~10,000 to ~400,000 events per day in production on 2 vCPUs and 4–8 GB of RAM, and load-tested it for a one-million-per-day requirement. Replaced N+1 queries and repeated database access with batching and caching, cutting processing time from 150–300 ms to roughly 12 ms per event.",
 				},
 				skills: ["Java", "PostgreSQL", "Hibernate"],
 				year: 2023,
