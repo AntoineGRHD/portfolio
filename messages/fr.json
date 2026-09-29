@@ -14,7 +14,7 @@
 	"error_back_home": "Retour à l'accueil",
 	"hero_tagline": "Développeur fullstack spécialisé en <strong>Java/Spring Boot</strong> et <strong>Angular/TypeScript</strong>, orienté architecture backend et performance.",
 	"current_title": "Poste actuel",
-	"experience_ubi_summary": "Tech lead sur la plateforme IoT d'UBI Solutions, qui centralise les données de tags BLE, de traceurs GPS cellulaires et de serrures connectées pour aider des clients B2B à optimiser leurs processus. Dans une équipe de cinq, je prends en charge les problèmes techniques les plus complexes et les décisions d'architecture, comme la transition de la plateforme vers un monolithe modulaire, et j'assure le mentorat de l'équipe.",
+	"experience_ubi_summary": "Tech lead au sein d'une équipe de développement de cinq personnes, sur la plateforme d'objets connectés d'UBI Solutions, utilisée par des clients B2B pour suivre leurs équipements et optimiser leurs opérations. Je développe les fonctionnalités clés et oriente les décisions d'architecture, en visant la maintenabilité, la performance et l'évolution des besoins métier. J'accompagne les autres développeurs dans la résolution de problèmes techniques complexes et la mise en place de pratiques qui gardent la logique métier lisible et les changements plus faciles à relire.",
 	"current_progression_label": "Progression",
 	"current_projects_title": "Principales contributions",
 	"previous_title": "Expériences précédentes",
