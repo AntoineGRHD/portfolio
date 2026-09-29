@@ -1,5 +1,36 @@
-# portfolio
+# antoinegourhand.com
 
-## To do
+My personal portfolio: a bilingual (English/French) single-page site presenting my experience as a tech lead and fullstack developer.
 
-- [ ] **Structured data (`Person` JSON-LD).** Add a schema.org `Person` block to the page head so search engines tie the site to the right person: name, job title, employer (`worksFor`), location, and profile links in `sameAs`. Needs the LinkedIn and GitHub URLs; those could also be linked from the contact section.
+**Live:** [antoinegourhand.com](https://antoinegourhand.com)
+
+![Portfolio home page](static/og-en.png)
+
+## Stack
+
+- [SvelteKit](https://svelte.dev/docs/kit) with Svelte 5 and TypeScript
+- Paraglide for internationalization
+- SCSS
+- Prerendered as a static site, deployed to GitHub Pages with GitHub Actions
+
+Content (experience, skills) lives in `src/data/`, interface text in `messages/`.
+
+## Running locally
+
+Requires Node.js 24 or later.
+
+```sh
+cp .env.example .env   # then set CONTACT_EMAIL
+npm ci
+npm run dev
+```
+
+Other scripts: `npm run build`, `npm run check` (type checking) and `npm run lint`.
+
+## Deployment
+
+Every push to `main` builds and deploys the site through GitHub Actions. The build reads the contact address from the `CONTACT_EMAIL` repository secret.
+
+---
+
+Built with the help of AI coding agents (Claude Code).
