@@ -204,7 +204,7 @@ export const occupations: Occupation[] = [
 				organization: "See-D",
 				location: "Vannes, France",
 				description: {
-					fr: "Développement d'une application web permettant à une équipe de statisticiens de consulter et modifier la description de ses jeux de données, avec des formulaires générés à partir de leurs champs.",
+					fr: "Développement d'une application web permettant à une équipe de statisticiens de consulter et modifier la description de ses jeux de données, avec des formulaires générés à partir de la définition des champs.",
 					en: "Built a web application for a statistics team to browse and edit the descriptions of its datasets, with forms generated from their field definitions.",
 				},
 				skills: ["Jade", "Node.js", "MongoDB", "Docker"],
@@ -272,7 +272,7 @@ export const occupations: Occupation[] = [
 				},
 				kind: "professional",
 				description: {
-					fr: "En parallèle de la plateforme principale, développement d'applications dédiées pour des clients des secteurs de la santé et de la logistique. Travail en direct avec eux pour clarifier leurs besoins et leurs règles métier, valider les évolutions nécessaires et assurer la compatibilité avec leurs systèmes existants.",
+					fr: "En parallèle de la plateforme principale, développement d'applications dédiées pour des clients des secteurs de la santé et de la logistique. En lien direct avec les clients pour clarifier leurs besoins et leurs règles métier, valider les évolutions nécessaires et garantir la compatibilité avec leurs systèmes existants.",
 					en: "Alongside the main platform, developed separate applications for clients in healthcare and logistics. Worked directly with them to clarify their needs and business rules, agree on the required changes, and ensure compatibility with their existing business systems.",
 				},
 				skills: ["Java", "Angular"],
@@ -289,8 +289,8 @@ export const occupations: Occupation[] = [
 				},
 				kind: "professional",
 				description: {
-					fr: "Animation des discussions d'architecture avec l'équipe, en adaptant les propositions aux retours des développeurs et en décidant d'avancer malgré les désaccords ou d'abandonner une approche. Aide aux développeurs pour déboguer des problèmes complexes et raisonner sur leurs choix de conception.",
-					en: "Led architecture discussions with the team, adapting proposals to developers' concerns and deciding when to proceed despite disagreement or drop an approach. Helped teammates debug difficult issues and reason through design choices.",
+					fr: "Animation des discussions d'architecture avec l'équipe, en prenant en compte les objections, les contraintes et les compromis : ajustement des propositions lorsque les remarques en révélaient les faiblesses, et arbitrage lorsque les avis restaient partagés. Accompagnement des développeurs dans le debugging de problèmes complexes et dans leurs choix de conception.",
+					en: "Led architecture discussions with the team, weighing objections against constraints and trade-offs: adapting proposals where concerns revealed weaknesses, and making the call when views still differed. Helped teammates debug difficult issues and reason through design choices.",
 				},
 				year: 2024,
 				endYear: "present",
@@ -309,7 +309,7 @@ export const occupations: Occupation[] = [
 				},
 				kind: "professional",
 				description: {
-					fr: "Évaluation des agents de codage et définition des pratiques de l'équipe pour leur utilisation en développement : quelles tâches déléguer, à quelles données les agents peuvent accéder et comment relire le code généré.",
+					fr: "Évaluation d'agents IA de développement et définition des règles d'usage de l'équipe : tâches à déléguer, données accessibles aux agents, relecture du code généré.",
 					en: "Evaluated coding agents and established team guidelines for their use in development: which tasks to delegate, what data agents can access, and how generated code should be reviewed.",
 				},
 				skills: ["Claude Code", "Codex", "Java", "Angular"],
@@ -330,7 +330,7 @@ export const occupations: Occupation[] = [
 				},
 				kind: "professional",
 				description: {
-					fr: "Développement de modules Java et Spring Boot pour intégrer des équipements aux formats de messages variés et aux protocoles inégalement standardisés. Gestion des données entrantes, des commandes sortantes et des mises à jour de firmware à distance.",
+					fr: "Développement de modules Java et Spring Boot pour intégrer des équipements aux formats de messages variés et aux protocoles peu standardisés. Gestion des données entrantes, des commandes sortantes et des mises à jour de firmware à distance.",
 					en: "Developed Java and Spring Boot modules to integrate devices with varied message formats and uneven protocol standardization. Handled incoming device data, outgoing commands and remote firmware updates.",
 				},
 				skills: ["Java", "Spring Boot"],
@@ -369,7 +369,7 @@ export const occupations: Occupation[] = [
 				},
 				kind: "professional",
 				description: {
-					fr: "Mise en place de l'observabilité applicative (métriques, taux d'erreur et logs avec OpenTelemetry, Prometheus, Loki et Grafana), et introduction des contrôles de qualité SonarQube, de règles ESLint plus strictes (dont des règles spécifiques à Angular) et d'environnements de développement basés sur Docker.",
+					fr: "Mise en place de l'observabilité applicative (métriques, taux d'erreur et logs avec OpenTelemetry, Prometheus, Loki et Grafana), et introduction des contrôles de qualité SonarQube, de règles ESLint plus strictes (dont des règles spécifiques à Angular) et d'environnements de développement sous Docker.",
 					en: "Set up application observability (metrics, error rates and logs with OpenTelemetry, Prometheus, Loki and Grafana), and introduced SonarQube quality checks, stricter ESLint rules including Angular-specific ones, and Docker-based development environments.",
 				},
 				skills: ["OpenTelemetry", "Prometheus", "Loki", "Grafana", "SonarQube", "ESLint", "Docker"],
@@ -411,7 +411,7 @@ export const occupations: Occupation[] = [
 				},
 				kind: "professional",
 				description: {
-					fr: "Orientation des décisions d'architecture sur la plateforme et les applications clientes, en faisant évoluer les systèmes existants de manière incrémentale, notamment la transition en cours vers un monolithe modulaire. Documentation de l'architecture et des API, et rédaction de spécifications pour les fonctionnalités à venir.",
+					fr: "Pilotage des choix d'architecture de la plateforme et des applications clientes, avec une évolution incrémentale des systèmes existants, dont la transition en cours vers un monolithe modulaire. Documentation de l'architecture et des API, et rédaction de spécifications pour les fonctionnalités à venir.",
 					en: "Guided architecture decisions across the platform and client applications, evolving existing systems incrementally, including the ongoing move to a modular monolith. Documented the architecture and APIs, and wrote specifications for upcoming features.",
 				},
 				skills: ["Java", "Spring Boot"],
