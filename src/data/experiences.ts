@@ -289,8 +289,8 @@ export const occupations: Occupation[] = [
 				},
 				kind: "professional",
 				description: {
-					fr: "Discussion des évolutions d'architecture et d'interfaces avec l'équipe, en expliquant les compromis et en adaptant les propositions aux retours des développeurs, avec la décision d'avancer malgré les désaccords ou d'abandonner une approche. Débogage de problèmes complexes aux côtés de l'équipe et accompagnement dans les choix de conception (responsabilités des services, structures de données, logique métier testable), en tenant compte des risques de performance et de migration.",
-					en: "Discussed proposed architecture and interface changes with the team, explained the trade-offs and adapted proposals to developers' concerns, deciding when to move forward despite disagreement and when to drop an approach. Debugged difficult issues alongside teammates and helped them reason through design choices such as service responsibilities, data structures and testable business logic, while weighing performance and migration risks.",
+					fr: "Animation des discussions d'architecture avec l'équipe, en adaptant les propositions aux retours des développeurs et en décidant d'avancer malgré les désaccords ou d'abandonner une approche. Aide aux développeurs pour déboguer des problèmes complexes et raisonner sur leurs choix de conception.",
+					en: "Led architecture discussions with the team, adapting proposals to developers' concerns and deciding when to proceed despite disagreement or drop an approach. Helped teammates debug difficult issues and reason through design choices.",
 				},
 				year: 2024,
 				endYear: "present",
