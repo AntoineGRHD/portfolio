@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { m } from "$codegen/paraglide/messages.js";
 	import { projectAnchor, type EnrichedProject } from "$data/experiences";
-	import ContributionItem from "$lib/components/contribution-item.svelte";
 	import RoleIdentity from "$lib/components/role-identity.svelte";
 	import SectionMarker from "$lib/components/section-marker.svelte";
 	import SkillTags from "$lib/components/skill-tags.svelte";
@@ -32,25 +31,6 @@
 							<div class="project-stack">
 								<SkillTags skills={project.skills} label={m.timeline_technologies()} />
 							</div>
-						{/if}
-
-						{#if project.contributions?.length}
-							{@const contributions = project.contributions}
-							<section class="contributions" aria-labelledby="contributions-{project.id}">
-								<p class="subsection-title" id="contributions-{project.id}">
-									{m.contributions_label()}
-								</p>
-								<div class="compact-list">
-									{#each contributions as contribution (contribution.id)}
-										<ContributionItem
-											name={contribution.name}
-											description={contribution.description}
-											skills={contribution.skills}
-											compact
-										/>
-									{/each}
-								</div>
-							</section>
 						{/if}
 					</RoleIdentity>
 				</article>
@@ -107,27 +87,6 @@
 	/* the stack sits under the summary that describes the work it was used for */
 	.project-stack {
 		margin-top: 14px;
-	}
-
-	/* the secondary register, same as the run under the current role */
-	.contributions {
-		margin-top: 22px;
-	}
-
-	.subsection-title {
-		margin: 0;
-		color: rgba(255, 255, 255, 0.76);
-		font-size: var(--fs-caption);
-		font-weight: 600;
-		line-height: 1.6;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-	}
-
-	.compact-list {
-		display: grid;
-		gap: 18px;
-		margin-top: 16px;
 	}
 
 </style>

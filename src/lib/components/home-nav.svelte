@@ -80,7 +80,7 @@
 		// capture, because on mobile it is <main> that scrolls, not the window
 		document.addEventListener("scroll", schedule, { capture: true, passive: true });
 		window.addEventListener("resize", schedule, { passive: true });
-		// expanding "more contributions" moves every section below it
+		// anything that changes height (fonts loading, content revealed on click) moves the sections below it
 		const observer = new ResizeObserver(schedule);
 		observer.observe(document.body);
 

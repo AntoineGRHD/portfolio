@@ -3,14 +3,6 @@ import { getLocale } from "$codegen/paraglide/runtime.js";
 export type ProjectKind = "university" | "internship" | "personal" | "professional";
 export type LocalizedText = string | { en: string; fr: string };
 
-/** A discrete piece of work done inside a project or role. */
-export type Contribution = {
-	id: string;
-	name: LocalizedText;
-	description?: LocalizedText;
-	skills?: string[];
-};
-
 export type Project = {
 	id: string;
 	name: LocalizedText;
@@ -33,14 +25,6 @@ export type Project = {
 	order?: number;
 	/** Marks the work worth reading first within a role. */
 	main?: boolean;
-	/** Work done inside this project, listed under it in the compact register. */
-	contributions?: Contribution[];
-};
-
-export type Mission = {
-	label: LocalizedText;
-	/** Display rank within the occupation, lowest first. Independent of array position. */
-	order: number;
 };
 
 export type Milestone = {
@@ -58,7 +42,6 @@ export type Occupation = {
 	startYear: number;
 	endYear: number | "present";
 	date?: LocalizedText;
-	missions?: Mission[];
 	milestones?: Milestone[];
 	projects: Project[];
 };
@@ -76,10 +59,6 @@ export function localize(value: LocalizedText | undefined): string {
 
 	const locale = getLocale() as keyof typeof value;
 	return value[locale] ?? value.en ?? value.fr;
-}
-
-export function sortMissions(missions: Mission[]): Mission[] {
-	return [...missions].sort((a, b) => a.order - b.order);
 }
 
 /**
@@ -146,62 +125,7 @@ export const occupations: Occupation[] = [
 			fr: "Sept. 2014 – Juin 2016",
 			en: "Sep. 2014 – Jun. 2016",
 		},
-		missions: [
-			{
-				label: {
-					fr: "Développement fullstack",
-					en: "Fullstack development",
-				},
-				order: 1,
-			},
-			{
-				label: {
-					fr: "Système et réseau",
-					en: "Systems and networking",
-				},
-				order: 2,
-			},
-			{
-				label: {
-					fr: "Bases de données relationnelles",
-					en: "Relational databases",
-				},
-				order: 3,
-			},
-			{
-				label: {
-					fr: "Génie logiciel et modélisation objet",
-					en: "Software engineering and object modeling",
-				},
-				order: 4,
-			},
-			{
-				label: {
-					fr: "Design et IHM",
-					en: "UI design and HCI",
-				},
-				order: 5,
-			},
-		],
 		projects: [
-			{
-				id: "cerhio",
-				name: {
-					fr: "CERHIO - Globe historique",
-					en: "CERHIO - Historical globe",
-				},
-				kind: "university",
-				description: {
-					fr: "Conception et réalisation d'une application web interactive pour visualiser les trajets historiques de la Compagnie des Indes sur un globe.",
-					en: "Designed and built an interactive web application to visualize historical French East India Company routes on a globe.",
-				},
-				skills: ["HTML", "CSS", "JavaScript"],
-				image: "/images/projects/tabnum/canvas.webp",
-				year: 2015,
-				endYear: 2016,
-				sortOrder: 2015.9,
-				date: "2015 – 2016",
-			},
 		],
 	},
 	{
@@ -222,29 +146,6 @@ export const occupations: Occupation[] = [
 			fr: "Sept. 2016 – Juin 2017",
 			en: "Sep. 2016 – Jun. 2017",
 		},
-		missions: [
-			{
-				label: {
-					fr: "Développement fullstack",
-					en: "Fullstack development",
-				},
-				order: 1,
-			},
-			{
-				label: {
-					fr: "Bases de données relationnelles",
-					en: "Relational databases",
-				},
-				order: 2,
-			},
-			{
-				label: {
-					fr: "Génie logiciel et modélisation objet",
-					en: "Software engineering and object modeling",
-				},
-				order: 3,
-			},
-		],
 		projects: [
 			{
 				id: "irisa-gee",
@@ -257,36 +158,10 @@ export const occupations: Occupation[] = [
 				organization: "IRISA",
 				location: "Vannes, France",
 				description: {
-					fr: "Évaluation de Google Earth Engine par rapport aux outils existants de l'équipe de recherche. Sélection des traitements à comparer avec les chercheurs, réimplémentation sur la plateforme, puis mesure des performances et présentation des résultats.",
-					en: "Evaluated Google Earth Engine against the research team’s existing tools. Worked with researchers to select the processing tasks to compare, reimplemented them on the platform, and measured and reported their performance.",
+					fr: "Évaluation de Google Earth Engine face aux outils de l'équipe de recherche, en réimplémentant leurs traitements et en comparant leurs performances.",
+					en: "Evaluated Google Earth Engine against the research team's existing tools by reimplementing their processing tasks and benchmarking them.",
 				},
 				skills: ["JavaScript", "Python"],
-				contributions: [
-					{
-						id: "irisa-scope",
-						name: { fr: "Échanges avec l'équipe scientifique", en: "Work with the scientific team" },
-						description: {
-							fr: "Identification des traitements existants de l'équipe que l'étude devait couvrir.",
-							en: "Established which of the team's existing workloads the study needed to cover.",
-						},
-					},
-					{
-						id: "irisa-algorithms",
-						name: { fr: "Implémentation des algorithmes", en: "Algorithm implementation" },
-						description: {
-							fr: "Réimplémentation sur la plateforme des traitements que l'équipe utilisait déjà.",
-							en: "Reimplemented the processing the team already used, this time on the platform.",
-						},
-					},
-					{
-						id: "irisa-benchmark",
-						name: { fr: "Comparaison des performances", en: "Performance comparison" },
-						description: {
-							fr: "Comparaison des performances des traitements sur Google Earth Engine et avec les outils existants, puis présentation des résultats à l'équipe.",
-							en: "Compared processing performance on Google Earth Engine with the team's existing tools and presented the results.",
-						},
-					},
-				],
 				year: 2016,
 				sortOrder: 2016.6,
 				date: {
@@ -314,56 +189,7 @@ export const occupations: Occupation[] = [
 			fr: "Sept. 2017 – Juin 2019",
 			en: "Sep. 2017 – Jun. 2019",
 		},
-		missions: [
-			{
-				label: {
-					fr: "Développement web et mobile",
-					en: "Web and mobile development",
-				},
-				order: 1,
-			},
-			{
-				label: {
-					fr: "Calcul distribué",
-					en: "Distributed computing",
-				},
-				order: 2,
-			},
-			{
-				label: "Machine Learning / Deep Learning",
-				order: 3,
-			},
-			{
-				label: {
-					fr: "Programmation fonctionnelle",
-					en: "Functional programming",
-				},
-				order: 4,
-			},
-			{
-				label: {
-					fr: "Cybersécurité et cryptographie",
-					en: "Cybersecurity and cryptography",
-				},
-				order: 5,
-			},
-		],
 		projects: [
-			{
-				id: "irisa-leapmotion",
-				name: "IRISA - LeapMotion Classifier",
-				kind: "university",
-				description: {
-					fr: "Entraînement et validation d'un classifieur SVM pour reconnaître différents types de mouvements à partir des coordonnées captées par une caméra LeapMotion.",
-					en: "Trained and validated an SVM classifier to recognize movement types from coordinates captured by a LeapMotion camera.",
-				},
-				skills: ["Python", "Matplotlib"],
-				image: "/images/projects/unity-leapmotion/unity-leapmotion.webp",
-				year: 2017,
-				endYear: 2018,
-				sortOrder: 2017.9,
-				date: "2017 – 2018",
-			},
 			{
 				id: "seed",
 				name: {
@@ -378,36 +204,10 @@ export const occupations: Occupation[] = [
 				organization: "See-D",
 				location: "Vannes, France",
 				description: {
-					fr: "Conception et développement d'une application web permettant à une équipe statistique de consulter et modifier la description de ses jeux de données. Création de vues Jade rendues côté serveur et de formulaires générés à partir des champs définis par l'équipe, en adaptant l'application à l'évolution de leur structure.",
-					en: "Designed and built a web application for a statistics team to view and edit descriptions of its datasets. Built server-rendered Jade views and generated input forms from the fields defined by the team, adapting the application as their structure evolved.",
+					fr: "Développement d'une application web permettant à une équipe de statisticiens de consulter et modifier la description de ses jeux de données, avec des formulaires générés à partir de leurs champs.",
+					en: "Built a web application for a statistics team to browse and edit the descriptions of its datasets, with forms generated from their field definitions.",
 				},
 				skills: ["Jade", "Node.js", "MongoDB", "Docker"],
-				contributions: [
-					{
-						id: "seed-ssr",
-						name: { fr: "Rendu côté serveur", en: "Server-side rendering" },
-						description: {
-							fr: "Développement de vues Jade rendues côté serveur pour consulter la description des jeux de données.",
-							en: "Built server-rendered Jade views to browse dataset descriptions.",
-						},
-					},
-					{
-						id: "seed-schema",
-						name: { fr: "Gestion des évolutions de schéma", en: "Schema change management" },
-						description: {
-							fr: "Adaptation des vues et formulaires aux changements des champs et de leur structure.",
-							en: "Updated views and forms as the fields and their structure changed.",
-						},
-					},
-					{
-						id: "seed-dynamic-forms",
-						name: { fr: "Formulaires dynamiques", en: "Dynamic forms" },
-						description: {
-							fr: "Génération des formulaires de saisie à partir de la définition des champs.",
-							en: "Generated input forms from field definitions.",
-						},
-					},
-				],
 				year: 2019,
 				sortOrder: 2019.6,
 				date: {
@@ -429,36 +229,6 @@ export const occupations: Occupation[] = [
 		startYear: 2019,
 		endYear: 2021,
 		date: "2019 – 2021",
-		missions: [
-			{
-				label: {
-					fr: "Apprentissage de React et de l'écosystème frontend moderne",
-					en: "Learning React and the modern frontend ecosystem",
-				},
-				order: 1,
-			},
-			{
-				label: {
-					fr: "Approfondissement d'Angular et de TypeScript",
-					en: "Deeper work with Angular and TypeScript",
-				},
-				order: 2,
-			},
-			{
-				label: {
-					fr: "Découverte de Spring Boot et des architectures backend Java",
-					en: "Exploration of Spring Boot and Java backend architectures",
-				},
-				order: 3,
-			},
-			{
-				label: {
-					fr: "Projets personnels et contributions open source",
-					en: "Personal projects and open-source contributions",
-				},
-				order: 4,
-			},
-		],
 		projects: [
 			{
 				id: "zboard",
