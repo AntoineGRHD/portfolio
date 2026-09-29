@@ -325,13 +325,13 @@ export const occupations: Occupation[] = [
 			{
 				id: "iot",
 				name: {
-					fr: "Modules IoT",
-					en: "IoT Modules",
+					fr: "Intégration d'équipements",
+					en: "Device integration",
 				},
 				kind: "professional",
 				description: {
-					fr: "Développement de modules de communication en Java et Spring Boot pour connecter les équipements terrain à la plateforme et intégrer leurs données aux applications.",
-					en: "Developed communication modules in Java and Spring Boot to connect field devices to the platform and integrate their data into the applications.",
+					fr: "Développement de modules Java et Spring Boot pour intégrer des équipements aux formats de messages variés et aux protocoles inégalement standardisés. Gestion des données entrantes, des commandes sortantes et des mises à jour de firmware à distance.",
+					en: "Developed Java and Spring Boot modules to integrate devices with varied message formats and uneven protocol standardization. Handled incoming device data, outgoing commands and remote firmware updates.",
 				},
 				skills: ["Java", "Spring Boot"],
 				year: 2021,
@@ -352,8 +352,8 @@ export const occupations: Occupation[] = [
 				},
 				kind: "professional",
 				description: {
-					fr: "Développement d'interfaces Angular pour présenter les données dans des tableaux, des cartes OpenLayers et des graphiques Chart.js.",
-					en: "Built Angular interfaces to present data in tables, OpenLayers maps, and Chart.js charts.",
+					fr: "Développement d'interfaces Angular pour explorer les données des équipements et leur historique au travers de cartes interactives, de graphiques et de tableaux personnalisables. Consultation détaillée des enregistrements et navigation entre les informations liées, avec OpenLayers pour les cartes et Chart.js pour les graphiques.",
+					en: "Built Angular interfaces for exploring device data and history through interactive maps, charts and customizable tables. Enabled users to inspect records in detail and navigate related information, using OpenLayers for maps and Chart.js for charts.",
 				},
 				skills: ["Angular", "OpenLayers", "Chart.js"],
 				year: 2022,
