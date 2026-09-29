@@ -265,6 +265,43 @@ export const occupations: Occupation[] = [
 		],
 		projects: [
 			{
+				id: "client-projects",
+				name: {
+					fr: "Projets clients",
+					en: "Client projects",
+				},
+				kind: "professional",
+				description: {
+					fr: "En parallèle de la plateforme principale, développement d'applications dédiées pour des clients des secteurs de la santé et de la logistique. Travail en direct avec eux pour clarifier leurs besoins et leurs règles métier, valider les évolutions nécessaires et assurer la compatibilité avec leurs systèmes existants.",
+					en: "Alongside the main platform, developed separate applications for clients in healthcare and logistics. Worked directly with them to clarify their needs and business rules, agree on the required changes, and ensure compatibility with their existing business systems.",
+				},
+				skills: ["Java", "Angular"],
+				year: 2021,
+				endYear: "present",
+				order: 3,
+				main: true,
+			},
+			{
+				id: "technical-guidance",
+				name: {
+					fr: "Accompagnement technique",
+					en: "Technical guidance",
+				},
+				kind: "professional",
+				description: {
+					fr: "Débogage de problèmes complexes aux côtés de l'équipe et accompagnement dans les choix de conception : garder la logique métier découplée et testable, et savoir quand une implémentation plus simple suffit. Accompagnement de l'équipe dans l'évaluation des risques de performance et de migration lors de la planification des évolutions.",
+					en: "Debugged difficult issues alongside teammates and helped them reason through design decisions: keeping core business logic decoupled and testable, and recognizing when a simpler implementation is enough. Guided the team in weighing performance and migration risks when planning changes.",
+				},
+				year: 2024,
+				endYear: "present",
+				sortOrder: 2024.8,
+				order: 4,
+				date: {
+					fr: "Oct. 2024 – Présent",
+					en: "Oct. 2024 – Present",
+				},
+			},
+			{
 				id: "ai-workflow",
 				name: {
 					fr: "Workflow IA",
@@ -279,7 +316,7 @@ export const occupations: Occupation[] = [
 				year: 2025,
 				endYear: "present",
 				sortOrder: 2025.6,
-				order: 6,
+				order: 8,
 				date: {
 					fr: "Mi-2025 – Présent",
 					en: "Mid-2025 – Present",
@@ -300,7 +337,7 @@ export const occupations: Occupation[] = [
 				year: 2021,
 				endYear: 2022,
 				sortOrder: 2021.9,
-				order: 3,
+				order: 2,
 				main: true,
 				date: {
 					fr: "Fin 2021 – 2022",
@@ -321,7 +358,7 @@ export const occupations: Occupation[] = [
 				skills: ["Angular", "OpenLayers", "Chart.js"],
 				year: 2022,
 				sortOrder: 2022,
-				order: 4,
+				order: 6,
 				date: "2022",
 			},
 			{
@@ -338,7 +375,7 @@ export const occupations: Occupation[] = [
 				skills: ["OpenTelemetry", "Prometheus", "Loki", "Grafana"],
 				year: 2023,
 				sortOrder: 2023.1,
-				order: 5,
+				order: 7,
 				date: {
 					fr: "Début 2023",
 					en: "Early 2023",
@@ -347,20 +384,19 @@ export const occupations: Occupation[] = [
 			{
 				id: "performance",
 				name: {
-					fr: "Optimisation des performances",
-					en: "Performance optimization",
+					fr: "Performance et montée en charge",
+					en: "Performance and scaling",
 				},
 				kind: "professional",
 				description: {
-					fr: "Optimisation des requêtes PostgreSQL et des traitements Java côté serveur.",
-					en: "Optimized PostgreSQL queries and server-side Java processing.",
+					fr: "Adaptation des traitements backend pour accompagner une croissance d'environ 10 000 à près d'un million d'événements par jour, avec des ressources de calcul et de mémoire limitées. Résolution de requêtes N+1 et d'accès répétés à la base par du batching et de la mise en cache, et passage de certaines tables en immuable pour simplifier la gestion des données.",
+					en: "Adapted backend processing to support growth from roughly 10,000 toward one million events per day, within tight compute and memory limits. Addressed N+1 queries and repeated database access through batching and caching, and made selected tables immutable to simplify data handling.",
 				},
 				skills: ["Java", "PostgreSQL", "Hibernate"],
 				year: 2023,
 				endYear: 2024,
 				sortOrder: 2023.6,
-				order: 2,
-				main: true,
+				order: 5,
 				date: {
 					fr: "Mi-2023 – 2024",
 					en: "Mid-2023 – 2024",
@@ -402,7 +438,7 @@ export const occupations: Occupation[] = [
 				skills: ["LaTeX"],
 				year: 2025,
 				sortOrder: 2025,
-				order: 7,
+				order: 9,
 				date: "2025",
 			},
 		],
