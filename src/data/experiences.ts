@@ -337,8 +337,7 @@ export const occupations: Occupation[] = [
 				year: 2021,
 				endYear: 2022,
 				sortOrder: 2021.9,
-				order: 2,
-				main: true,
+				order: 5,
 				date: {
 					fr: "Fin 2021 – 2022",
 					en: "Late 2021 – 2022",
@@ -397,7 +396,8 @@ export const occupations: Occupation[] = [
 				year: 2023,
 				endYear: 2024,
 				sortOrder: 2023.6,
-				order: 5,
+				order: 2,
+				main: true,
 				date: {
 					fr: "Mi-2023 – 2024",
 					en: "Mid-2023 – 2024",
