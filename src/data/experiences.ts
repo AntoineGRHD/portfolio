@@ -8,6 +8,10 @@ export type Project = {
 	name: LocalizedText;
 	kind: ProjectKind;
 	description: LocalizedText;
+	/** One-line version for the CV, where the full description does not fit. */
+	short?: LocalizedText;
+	/** Key points for the CV, one line each, shown instead of the description. */
+	points?: LocalizedText[];
 	/** Position held, when the project stands on its own as a role (internships). */
 	role?: LocalizedText;
 	/** Host organization, when it differs from the parent occupation's institution. */
@@ -238,6 +242,10 @@ export const occupations: Occupation[] = [
 					fr: "Développement d'un tableau de bord partagé pour suivre les streamers participant à un événement caritatif et afficher leur statut en temps réel. Réalisé avec React et Node.js.",
 					en: "Built a shared dashboard for following streamers participating in a charity event, showing their status in real time. Developed with React and Node.js.",
 				},
+				short: {
+					fr: "Tableau de bord en temps réel pour suivre les streamers d'un événement caritatif, en React et Node.js.",
+					en: "Real-time dashboard following streamers during a charity event, built with React and Node.js.",
+				},
 				skills: ["React", "CSS", "Node.js"],
 				image: "/images/projects/zboard/zboard_main.webp",
 				year: 2020,
@@ -275,6 +283,20 @@ export const occupations: Occupation[] = [
 					fr: "En parallèle de la plateforme principale, développement d'applications dédiées pour des clients des secteurs de la santé et de la logistique. En lien direct avec les clients pour clarifier leurs besoins et leurs règles métier, valider les évolutions nécessaires et garantir la compatibilité avec leurs systèmes existants.",
 					en: "Alongside the main platform, developed separate applications for clients in healthcare and logistics. Worked directly with them to clarify their needs and business rules, agree on the required changes, and ensure compatibility with their existing business systems.",
 				},
+				points: [
+					{
+						fr: "Applications dédiées pour des clients de la santé et de la logistique",
+						en: "Built separate applications for healthcare and logistics clients",
+					},
+					{
+						fr: "En lien direct avec les clients : besoins, règles métier, évolutions à valider",
+						en: "Worked directly with clients on needs, business rules and required changes",
+					},
+					{
+						fr: "Compatibilité garantie avec leurs systèmes existants",
+						en: "Ensured compatibility with their existing business systems",
+					},
+				],
 				skills: ["Java", "Angular"],
 				year: 2021,
 				endYear: "present",
@@ -289,8 +311,12 @@ export const occupations: Occupation[] = [
 				},
 				kind: "professional",
 				description: {
-					fr: "Animation des discussions d'architecture avec l'équipe, en prenant en compte les objections, les contraintes et les compromis : ajustement des propositions lorsque les remarques en révélaient les faiblesses, et arbitrage lorsque les avis restaient partagés. Accompagnement des développeurs dans le debugging de problèmes complexes et dans leurs choix de conception.",
+					fr: "Conduite des discussions d'architecture avec l'équipe, en prenant en compte les objections, les contraintes et les compromis : ajustement des propositions lorsque les remarques en révélaient les faiblesses, et arbitrage lorsque les avis restaient partagés. Accompagnement des développeurs dans le debugging de problèmes complexes et dans leurs choix de conception.",
 					en: "Led architecture discussions with the team, weighing objections against constraints and trade-offs: adapting proposals where concerns revealed weaknesses, and making the call when views still differed. Helped teammates debug difficult issues and reason through design choices.",
+				},
+				short: {
+					fr: "Conduite des discussions d'architecture et accompagnement des développeurs",
+					en: "Led architecture discussions and helped developers through design decisions",
 				},
 				year: 2024,
 				endYear: "present",
@@ -311,6 +337,10 @@ export const occupations: Occupation[] = [
 				description: {
 					fr: "Évaluation d'agents IA de développement et définition des règles d'usage de l'équipe : tâches à déléguer, données accessibles aux agents, relecture du code généré.",
 					en: "Evaluated coding agents and established team guidelines for their use in development: which tasks to delegate, what data agents can access, and how generated code should be reviewed.",
+				},
+				short: {
+					fr: "Évaluation d'agents IA (Claude Code, Codex) et règles d'usage de l'équipe",
+					en: "Evaluated coding agents (Claude Code, Codex) and set the team's usage rules",
 				},
 				skills: ["Claude Code", "Codex", "Java", "Angular"],
 				year: 2025,
@@ -333,6 +363,10 @@ export const occupations: Occupation[] = [
 					fr: "Développement de modules Java et Spring Boot pour intégrer des équipements aux formats de messages variés et aux protocoles peu standardisés. Gestion des données entrantes, des commandes sortantes et des mises à jour de firmware à distance.",
 					en: "Developed Java and Spring Boot modules to integrate devices with varied message formats and uneven protocol standardization. Handled incoming device data, outgoing commands and remote firmware updates.",
 				},
+				short: {
+					fr: "Modules Java/Spring Boot multi-protocoles : données, commandes, firmware",
+					en: "Multi-protocol Java/Spring Boot modules: data, commands, firmware updates",
+				},
 				skills: ["Java", "Spring Boot"],
 				year: 2021,
 				endYear: 2022,
@@ -354,6 +388,10 @@ export const occupations: Occupation[] = [
 					fr: "Développement d'interfaces Angular pour explorer les données des équipements et leur historique au travers de cartes interactives, de graphiques et de tableaux personnalisables. Consultation détaillée des enregistrements et navigation entre les informations liées, avec OpenLayers pour les cartes et Chart.js pour les graphiques.",
 					en: "Built Angular interfaces for exploring device data and history through interactive maps, charts and customizable tables. Enabled users to inspect records in detail and navigate related information, using OpenLayers for maps and Chart.js for charts.",
 				},
+				short: {
+					fr: "En Angular : cartes OpenLayers, graphiques Chart.js, tableaux personnalisables",
+					en: "In Angular: OpenLayers maps, Chart.js charts and custom tables",
+				},
 				skills: ["Angular", "OpenLayers", "Chart.js"],
 				year: 2022,
 				sortOrder: 2022,
@@ -371,6 +409,16 @@ export const occupations: Occupation[] = [
 					fr: "Mise en place de l'observabilité applicative (métriques, taux d'erreur et logs avec OpenTelemetry, Prometheus, Loki et Grafana), et introduction des contrôles de qualité SonarQube, de règles ESLint plus strictes (dont des règles spécifiques à Angular) et d'environnements de développement sous Docker.",
 					en: "Set up application observability (metrics, error rates and logs with OpenTelemetry, Prometheus, Loki and Grafana), and introduced SonarQube quality checks, stricter ESLint rules including Angular-specific ones, and Docker-based development environments.",
 				},
+				points: [
+					{
+						fr: "Supervision avec OpenTelemetry, Prometheus, Loki et Grafana",
+						en: "Monitoring with OpenTelemetry, Prometheus, Loki and Grafana",
+					},
+					{
+						fr: "Contrôles SonarQube, règles ESLint renforcées et environnements Docker",
+						en: "SonarQube quality checks, stricter ESLint rules and Docker dev environments",
+					},
+				],
 				skills: ["OpenTelemetry", "Prometheus", "Loki", "Grafana", "SonarQube", "ESLint", "Docker"],
 				year: 2023,
 				endYear: 2025,
@@ -392,6 +440,20 @@ export const occupations: Occupation[] = [
 					fr: "Montée en charge des traitements backend de ~10 000 à ~400 000 événements par jour en production, sur 2 vCPU et 4 à 8 Go de RAM, avec des tests de charge validant l'objectif d'un million par jour. Remplacement des requêtes N+1 et des accès répétés à la base par du batching et de la mise en cache, faisant passer le temps de traitement de 150–300 ms à environ 12 ms par événement.",
 					en: "Scaled backend processing from ~10,000 to ~400,000 events per day in production on 2 vCPUs and 4–8 GB of RAM, and load-tested it for a one-million-per-day requirement. Replaced N+1 queries and repeated database access with batching and caching, cutting processing time from 150–300 ms to roughly 12 ms per event.",
 				},
+				points: [
+					{
+						fr: "De ~10 000 à ~400 000 événements/jour en production (2 vCPU, 4–8 Go de RAM)",
+						en: "Scaled from ~10k to ~400k events/day in production on 2 vCPUs and 4–8 GB RAM",
+					},
+					{
+						fr: "Tests de charge validant l'objectif d'un million d'événements par jour",
+						en: "Load-tested for a one-million-events-per-day requirement",
+					},
+					{
+						fr: "Batching, cache, N+1 supprimées : de 150–300 ms à ~12 ms par événement",
+						en: "Batching and caching replaced N+1 queries: from 150–300 ms to ~12 ms per event",
+					},
+				],
 				skills: ["Java", "PostgreSQL", "Hibernate"],
 				year: 2023,
 				endYear: 2024,
@@ -414,6 +476,20 @@ export const occupations: Occupation[] = [
 					fr: "Pilotage des choix d'architecture de la plateforme et des applications clientes, avec une évolution incrémentale des systèmes existants, dont la transition en cours vers un monolithe modulaire. Documentation de l'architecture et des API, et rédaction de spécifications pour les fonctionnalités à venir.",
 					en: "Guided architecture decisions across the platform and client applications, evolving existing systems incrementally, including the ongoing move to a modular monolith. Documented the architecture and APIs, and wrote specifications for upcoming features.",
 				},
+				points: [
+					{
+						fr: "Pilotage de l'architecture de la plateforme et des applications clientes",
+						en: "Guided architecture decisions across the platform and client applications",
+					},
+					{
+						fr: "Évolution incrémentale de l'existant, vers un monolithe modulaire",
+						en: "Evolved existing systems incrementally, toward a modular monolith",
+					},
+					{
+						fr: "Documentation de l'architecture, des API et des fonctionnalités à venir",
+						en: "Documented architecture and APIs, and specified upcoming features",
+					},
+				],
 				skills: ["Java", "Spring Boot"],
 				year: 2024,
 				endYear: "present",

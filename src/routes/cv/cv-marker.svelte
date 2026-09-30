@@ -26,7 +26,7 @@
 			const width = accent ? box : ink;
 			return {
 				path: `M${x} ${height} L${x + width} ${height} L${x + width + lean} 0 L${x + lean} 0 Z`,
-				fill: accent ? (index === count - 2 ? "#55b3b2" : "#ee8c0f") : undefined,
+				tone: accent ? (index === count - 2 ? "blue" : "orange") : undefined,
 				opacity: accent ? 1 : Math.min(1, (index + 1) / fadeLength),
 			};
 		});
@@ -40,7 +40,7 @@
 		{#if marks.length}
 			<svg viewBox="0 0 {drawingWidth} {height}" style:width="{drawingWidth / 10}mm">
 				{#each marks as mark (mark.path)}
-					<path d={mark.path} fill={mark.fill} fill-opacity={mark.opacity} />
+					<path d={mark.path} class={mark.tone} fill-opacity={mark.opacity} />
 				{/each}
 			</svg>
 		{/if}
@@ -72,5 +72,14 @@
 		display: block;
 		height: 100%;
 		fill: var(--cv-tick);
+	}
+
+	/* the theme's accent pair, the same the icons, bullets and star use */
+	.blue {
+		fill: var(--cv-accent);
+	}
+
+	.orange {
+		fill: var(--cv-orange);
 	}
 </style>

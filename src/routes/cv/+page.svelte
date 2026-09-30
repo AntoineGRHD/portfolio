@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 	import Sparkle from "@lucide/svelte/icons/sparkle";
 	import { m } from "$codegen/paraglide/messages.js";
-	import { compareProjects, localize } from "$data/experiences";
+	import { compareProjects, localize, type Project } from "$data/experiences";
 	import { envSkills } from "$data/env-skills";
 	import { mainSkills } from "$data/main-skills";
 	import { currentExperience, education, internships, personalProjects } from "$data/sections";
@@ -23,6 +23,8 @@
 	const featured = contributions.filter((project) => project.main);
 	const others = contributions.filter((project) => !project.main);
 	const website = siteUrl.replace(/^https?:\/\//, "");
+	/* the CV lists each contribution as bullets: its points, else its one-line summary */
+	const bullets = (project: Project) => project.points ?? [project.short ?? project.description];
 
 	const skillGroups = [
 		{ label: () => m.cv_skills_stack(), skills: mainSkills },
@@ -81,16 +83,6 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-{#snippet tags(skills: string[] | undefined)}
-	{#if skills?.length}
-		<ul class="tags">
-			{#each skills as skill (skill)}
-				<li>{skill}</li>
-			{/each}
-		</ul>
-	{/if}
-{/snippet}
-
 <article class="cv" data-theme="dark" data-ready={ready}>
 	<svg class="bands" viewBox="0 0 100 100" aria-hidden="true">
 		{#each bands as band (band.color)}
@@ -128,8 +120,8 @@
 			<section>
 				<CvMarker label={m.cv_languages()} />
 				<ul class="plain">
-					<li>{m.cv_language_french()}</li>
-					<li>{m.cv_language_english()}</li>
+					<li>{m.cv_language_french()} <span class="muted">· {m.cv_language_french_level()}</span></li>
+					<li>{m.cv_language_english()} <span class="muted">· {m.cv_language_english_level()}</span></li>
 				</ul>
 			</section>
 
@@ -165,7 +157,7 @@
 					<div class="entry compact">
 						<h3>{localize(project.name)}</h3>
 						<p class="muted">{localize(project.date) || project.year}</p>
-						{@render tags(project.skills)}
+						<p class="short">{localize(project.short ?? project.description)}</p>
 					</div>
 				{/each}
 			</section>
@@ -200,21 +192,24 @@
 							{localize(project.name)}
 							<Sparkle class="star" size={11} strokeWidth={1.5} absoluteStrokeWidth aria-label={m.contribution_main()} />
 						</h4>
-						<p>{localize(project.description)}</p>
-						{@render tags(project.skills)}
+						<ul class="points">
+							{#each bullets(project) as point, index (index)}
+								<li>{localize(point)}</li>
+							{/each}
+						</ul>
 					</div>
 				{/each}
 				<p class="group-label others-label">{m.cv_other_contributions()}</p>
-				<ul class="others">
-					{#each others as project (project.id)}
-						<li>
-							<span class="others-name">{localize(project.name)}</span>
-							{#if project.skills?.length}
-								<span class="muted">· {project.skills.join(", ")}</span>
-							{/if}
-						</li>
-					{/each}
-				</ul>
+				{#each others as project (project.id)}
+					<div class="contribution minor">
+						<h4>{localize(project.name)}</h4>
+						<ul class="points">
+							{#each bullets(project) as point, index (index)}
+								<li>{localize(point)}</li>
+							{/each}
+						</ul>
+					</div>
+				{/each}
 			</section>
 
 			<section>
@@ -252,9 +247,11 @@
 		--cv-muted: rgba(255, 255, 255, 0.62);
 		--cv-rule: rgba(255, 255, 255, 0.14);
 		--cv-tick: #3a3a3a;
-		--cv-accent: #a4cfce;
-		--cv-accent-line: rgba(85, 179, 178, 0.45);
-		--cv-orange: #eac086;
+		/* one blue and one orange per theme, shared by every accent: marker slashes,
+		   icons, bullets, star and the current milestone */
+		/* the site's softened accent pair (see +layout.svelte), one source for both */
+		--cv-accent: var(--accent-blue-light);
+		--cv-orange: var(--accent-orange-light);
 		--cv-bands-opacity: 0.9;
 
 		/* set by the print script at runtime, so the selector must survive pruning */
@@ -265,9 +262,10 @@
 			--cv-muted: #5e5e5e;
 			--cv-rule: #dcdcdc;
 			--cv-tick: #c4c4c4;
-			--cv-accent: #1f6f6e;
-			--cv-accent-line: #9cc9c8;
-			--cv-orange: #c46f05;
+			/* deeper so they hold on white; the orange leans red rather than dark, which
+			   keeps it vivid instead of brown */
+			--cv-accent: #2f8f8e;
+			--cv-orange: #e25a12;
 			--cv-bands-opacity: 1;
 		}
 
@@ -465,9 +463,10 @@
 		flex-wrap: wrap;
 		align-items: baseline;
 		gap: 0.6mm 1.6mm;
-		/* ruled off like the contribution lists below it */
+		/* ruled off like the contribution lists below it; the extra half millimetre on
+		   top (taken back below) centres the letters, since Poppins sits high in its line */
 		margin-top: 2.8mm;
-		padding-top: 2.4mm;
+		padding-top: 2.9mm;
 		border-top: 1px solid var(--cv-rule);
 
 		.current {
@@ -481,7 +480,7 @@
 	}
 
 	.contributions-label {
-		margin-top: 3.2mm;
+		margin-top: 2.7mm;
 		padding-top: 2.6mm;
 		border-top: 1px solid var(--cv-rule);
 	}
@@ -502,9 +501,6 @@
 			color: var(--cv-orange);
 		}
 
-		p {
-			margin-top: 0.9mm;
-		}
 	}
 
 	/* the same heading-over-rule the selected contributions open with */
@@ -514,29 +510,51 @@
 		border-top: 1px solid var(--cv-rule);
 	}
 
-	.others {
-		display: grid;
-		gap: 1mm;
+
+
+	/* the other contributions: the same shape as the selected ones, a size down */
+	.contribution.minor {
+		margin-top: 2mm;
+		font-size: 7.9pt;
+
+		h4 {
+			font-size: 8.3pt;
+		}
+	}
+
+	.others-label + .contribution.minor {
 		margin-top: 1.6mm;
 	}
 
-	.others-name {
-		color: var(--cv-strong);
-		font-weight: 600;
-	}
-
-	.tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1mm;
-		margin-top: 1.2mm;
+	/* one idea per line, marked with the site's slash rather than a dot */
+	.points {
+		display: grid;
+		gap: 0.5mm;
+		margin-top: 0.9mm;
 
 		li {
-			padding: 0.2mm 1.4mm;
-			border: 1px solid var(--cv-accent-line);
-			color: var(--cv-accent);
-			font-size: 6.9pt;
-			line-height: 1.5;
+			position: relative;
+			padding-left: 3.2mm;
+
+			&::before {
+				content: "";
+				position: absolute;
+				left: 0.6mm;
+				/* measured against the letters: centred between cap and x-height, since
+				   Poppins sits high in its line box */
+				top: 0.36em;
+				width: 0.35mm;
+				height: 0.62em;
+				background: var(--cv-accent);
+				transform: skewX(-28deg);
+			}
 		}
 	}
+
+	.short {
+		margin-top: 0.6mm;
+	}
+
+
+
 </style>
