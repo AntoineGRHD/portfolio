@@ -36,6 +36,8 @@ jobs:
       - run: npm run lint
       # prints the CV PDFs into build/cv/ with the runner's Chrome
       - run: node scripts/build-cv.mjs
+      # captures the hero as the og:image previews into build/, so they always match the live site
+      - run: node scripts/capture-og.mjs
       - uses: actions/upload-pages-artifact@v5
         with:
           path: build

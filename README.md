@@ -4,7 +4,7 @@ My personal portfolio: a bilingual (English/French) single-page site presenting 
 
 **Live:** [antoinegourhand.com](https://antoinegourhand.com)
 
-![Portfolio home page](static/og-en.png)
+![Portfolio home page](https://antoinegourhand.com/og-en.png)
 
 ## Stack
 

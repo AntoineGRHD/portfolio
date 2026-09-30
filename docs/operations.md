@@ -25,7 +25,7 @@ Both are read at build time only, so after a change, redeploy: Actions → *Depl
 
 ## Deployment
 
-Every push to `main` runs `.github/workflows/deploy.yml`: `npm ci`, `npm run build`, `npm run check`, `npm run lint`, then `node scripts/build-cv.mjs`, and publishes `build/` to GitHub Pages. If any step fails, nothing is published and the live site stays on the previous version.
+Every push to `main` runs `.github/workflows/deploy.yml`: `npm ci`, `npm run build`, `npm run check`, `npm run lint`, `node scripts/build-cv.mjs` and `node scripts/capture-og.mjs`, then publishes `build/` to GitHub Pages. If any step fails, nothing is published and the live site stays on the previous version.
 
 Domain: `antoinegourhand.com`, set in three places that must agree:
 - `siteUrl` in `src/lib/site.ts`, which feeds the canonical and hreflang links, Open Graph URLs, `sitemap.xml` and `robots.txt`;
@@ -46,7 +46,7 @@ Published at `https://antoinegourhand.com/cv/antoine-gourhand-cv-<locale>-<theme
 
 - `npm run cv` builds the site, then prints. It reports the space left on the page per locale and **fails if the content outgrows one A4 page**, with the overflow in millimetres.
 - The file names are defined twice: `fileName` in `scripts/build-cv.mjs` and `cvPath` in `src/lib/site.ts`. Keep them in sync.
-- Chrome defaults to `google-chrome`; override it with `CHROME=/path/to/chrome`.
+- Chrome defaults to `google-chrome`; override it with `CHROME=/path/to/chrome`. Both rendering scripts share `scripts/lib/headless.mjs` (static server over `build/`, Chrome over the DevTools protocol).
 - The prerender step ignores links to `/cv/*.pdf` (`handleHttpError` in `svelte.config.js`), since the PDFs only exist after the build.
 
 Viewing them locally: `npm run preview` does **not** serve them, because it serves SvelteKit's internal output rather than `build/`. After `npm run cv`, serve `build/` as GitHub Pages does:
@@ -57,10 +57,8 @@ python3 -m http.server -d build 4173
 
 ## Social preview images
 
-`static/og-en.png` and `static/og-fr.png` (1200×630, used as `og:image`) are screenshots of the hero, **committed and not regenerated on deploy**. After changing anything visible in the hero (texts, colours, fonts), regenerate and commit them:
+The `og:image` previews, `og-en.png` and `og-fr.png` (1200×630), are screenshots of the hero taken by `scripts/capture-og.mjs` into `build/` on **every deploy**, so they always match the live hero. They are not committed.
 
-```sh
-npm run capture:og
-```
+To look at them locally: `npm run capture:og` (builds first), then open `build/og-*.png`.
 
 LinkedIn and other sites cache previews; LinkedIn's Post Inspector refreshes its copy.
