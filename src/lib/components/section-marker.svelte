@@ -66,11 +66,11 @@
 		}
 
 		.blue {
-			background: var(--accent-blue);
+			background: var(--accent-blue-light);
 		}
 
 		.orange {
-			background: var(--accent-orange);
+			background: var(--accent-orange-light);
 		}
 	}
 

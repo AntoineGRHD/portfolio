@@ -36,13 +36,14 @@
 	}
 
 	:global(:root) {
+		/* the vivid pair: hovers, focus rings and the hero bands */
 		--accent-orange: #ee8c0f;
-		/* the orange counterpart of --accent-blue-light: lifted and desaturated the
-		   same way, so the two read as a pair when they share a row */
-		--accent-orange-light: #eac086;
 		--accent-blue: #55b3b2;
-		/* the tint the skill chips read in — quiet enough to mark state in the nav */
-		--accent-blue-light: #a4cfce;
+		/* The softened pair every accent mark reads in: marker slashes, chips, the
+		   star, the current milestone, the active nav link. Softened from the vivid
+		   pair so it does not look dark on black; the dark CV uses it too. */
+		--accent-orange-light: #efb66a;
+		--accent-blue-light: #7cc1c0;
 		--page-bg: #050505;
 		--section-bg: var(--page-bg);
 		--surface-bg: #101010;
