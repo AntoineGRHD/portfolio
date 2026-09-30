@@ -327,7 +327,8 @@
 	.header {
 		position: relative;
 		margin-bottom: 5mm;
-		max-width: 138mm;
+		/* as wide as the corner bands allow (they start 46 mm from the right edge) */
+		max-width: 151mm;
 	}
 
 	.name {
@@ -350,7 +351,7 @@
 	.tagline {
 		margin-top: 2.5mm;
 		color: var(--cv-muted);
-		font-size: 9.2pt;
+		font-size: 8.8pt;
 
 		:global(strong) {
 			color: var(--cv-strong);
