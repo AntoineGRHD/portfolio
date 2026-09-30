@@ -19,7 +19,7 @@
 	};
 
 	/* encoded at build time from CONTACT_EMAIL, see +page.server.ts */
-	let { encodedEmail }: { encodedEmail: readonly number[] } = $props();
+	let { encodedEmail, showCvDownload }: { encodedEmail: readonly number[]; showCvDownload: boolean } = $props();
 
 	let copyTimer: ReturnType<typeof setTimeout> | undefined;
 	let email = $state<string | null>(null);
@@ -121,17 +121,19 @@
 				</p>
 			{/if}
 
-			<!-- eslint-disable svelte/no-navigation-without-resolve -- static files generated at deploy, not routes -->
-			<p class="mail-line">
-				<FileText class="row-icon" size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
-				<a class="action" href={cvPath(getLocale(), "light")}>{m.cv_download()}</a>
-				<span class="line-divider" aria-hidden="true"></span>
-				<a class="control" href={cvPath(getLocale(), "dark")}>
-					<Moon size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
-					<span>{m.cv_download_dark()}</span>
-				</a>
-			</p>
-			<!-- eslint-enable svelte/no-navigation-without-resolve -->
+			{#if showCvDownload}
+				<!-- eslint-disable svelte/no-navigation-without-resolve -- static files generated at deploy, not routes -->
+				<p class="mail-line">
+					<FileText class="row-icon" size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
+					<a class="action" href={cvPath(getLocale(), "light")}>{m.cv_download()}</a>
+					<span class="line-divider" aria-hidden="true"></span>
+					<a class="control" href={cvPath(getLocale(), "dark")}>
+						<Moon size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
+						<span>{m.cv_download_dark()}</span>
+					</a>
+				</p>
+				<!-- eslint-enable svelte/no-navigation-without-resolve -->
+			{/if}
 
 			<p class="mail-line location">
 				<MapPin class="row-icon" size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />

@@ -50,7 +50,7 @@
 	<PreviousExperiences projects={internships} />
 	<FormationSection occupations={education} />
 	<PersonalProjects projects={personalProjects} />
-	<ContactSection encodedEmail={data.encodedEmail} />
+	<ContactSection encodedEmail={data.encodedEmail} showCvDownload={data.showCvDownload} />
 </main>
 
 <style lang="scss">

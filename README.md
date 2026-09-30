@@ -29,7 +29,7 @@ Other scripts: `npm run build`, `npm run check` (type checking) and `npm run lin
 
 ## Deployment
 
-Every push to `main` builds and deploys the site through GitHub Actions. The build reads the contact address from the `CONTACT_EMAIL` repository secret.
+Every push to `main` builds and deploys the site through GitHub Actions. The build reads the contact address from the `CONTACT_EMAIL` repository secret, and shows the CV download link only when the `SHOW_CV_DOWNLOAD` repository variable is `true` (the CV PDFs are published either way).
 
 ---
 

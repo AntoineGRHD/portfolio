@@ -21,6 +21,8 @@ jobs:
     # read at build time and encoded into the page; the type check needs it declared too
     env:
       CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL }}
+      # a repository variable, not a secret; unset means the CV link stays hidden
+      SHOW_CV_DOWNLOAD: ${{ vars.SHOW_CV_DOWNLOAD }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
