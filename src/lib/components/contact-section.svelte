@@ -5,6 +5,7 @@
 	import FileText from "@lucide/svelte/icons/file-text";
 	import Mail from "@lucide/svelte/icons/mail";
 	import MapPin from "@lucide/svelte/icons/map-pin";
+	import Moon from "@lucide/svelte/icons/moon";
 	import { m } from "$codegen/paraglide/messages.js";
 	import { getLocale } from "$codegen/paraglide/runtime.js";
 	import { decodeEmail } from "$lib/email-obfuscation";
@@ -97,7 +98,7 @@
 		<div class="contact-row">
 			{#if email}
 				<p class="mail-line">
-					<Mail size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
+					<Mail class="row-icon" size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
 					<span class="email" aria-hidden="true">
 						{#each displayParts as part (part.id)}
 							<span style:order={part.order}>{part.char}</span>
@@ -114,23 +115,26 @@
 					</button>
 				</p>
 			{:else}
-				<button class="mail-line reveal" type="button" onclick={reveal}>
-					<Mail size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
-					<span>{m.contact_reveal()}</span>
-				</button>
+				<p class="mail-line">
+					<Mail class="row-icon" size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
+					<button class="action" type="button" onclick={reveal}>{m.contact_reveal()}</button>
+				</p>
 			{/if}
 
 			<!-- eslint-disable svelte/no-navigation-without-resolve -- static files generated at deploy, not routes -->
 			<p class="mail-line">
-				<FileText size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
-				<a class="cv-link" href={cvPath(getLocale(), "light")}>{m.cv_download()}</a>
+				<FileText class="row-icon" size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
+				<a class="action" href={cvPath(getLocale(), "light")}>{m.cv_download()}</a>
 				<span class="line-divider" aria-hidden="true"></span>
-				<a class="cv-alt" href={cvPath(getLocale(), "dark")}>{m.cv_download_dark()}</a>
+				<a class="control" href={cvPath(getLocale(), "dark")}>
+					<Moon size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
+					<span>{m.cv_download_dark()}</span>
+				</a>
 			</p>
 			<!-- eslint-enable svelte/no-navigation-without-resolve -->
 
-			<p class="location">
-				<MapPin size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
+			<p class="mail-line location">
+				<MapPin class="row-icon" size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
 				<span>{m.contact_location()}</span>
 			</p>
 		</div>
@@ -207,9 +211,16 @@
 		text-align: left;
 	}
 
-	.reveal {
+	/* Two registers for every row: the main action in the accent, then, after a
+	   divider, a secondary control (copy, dark version) in the page's control voice. */
+	.action {
+		padding: 0;
+		border: 0;
+		background: transparent;
 		color: var(--accent-orange-light);
 		cursor: pointer;
+		font: inherit;
+		text-decoration: none;
 		transition: color 0.2s ease;
 
 		&:hover,
@@ -222,6 +233,7 @@
 			outline-offset: 3px;
 		}
 	}
+
 
 	.email {
 		display: inline-flex;
@@ -251,6 +263,7 @@
 		line-height: 1;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
+		text-decoration: none;
 		transition: color 0.2s ease;
 
 		&:hover,
@@ -264,47 +277,16 @@
 		}
 	}
 
-	/* the download reads as the main action; the dark twin stays secondary */
-	.cv-link,
-	.cv-alt {
-		text-decoration: none;
-		transition: color 0.2s ease;
-
-		&:focus-visible {
-			outline: 2px solid rgba(238, 140, 15, 0.35);
-			outline-offset: 3px;
-		}
-	}
-
-	.cv-link {
-		color: var(--accent-orange-light);
-
-		&:hover {
-			color: var(--accent-orange);
-		}
-	}
-
-	.cv-alt {
-		color: rgba(255, 255, 255, 0.5);
-		font-size: var(--fs-small);
-
-		&:hover {
-			color: white;
-		}
-	}
-
+	/* information, not an action: same row, quieter */
 	.location {
-		display: inline-flex;
-		align-items: center;
-		gap: 7px;
-		margin: 0;
 		color: rgba(255, 255, 255, 0.5);
-		font-size: var(--fs-caption);
-		font-weight: 600;
-		line-height: 1.5;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
 	}
+
+	/* every row's leading icon, in one quiet tone whatever the row holds */
+	.contact-row :global(.row-icon) {
+		color: rgba(255, 255, 255, 0.5);
+	}
+
 
 	.line-divider {
 		width: 1px;
