@@ -9,6 +9,7 @@
 	import { upcomingSkills } from "$data/upcoming-skills";
 	import { decodeEmail } from "$lib/email-obfuscation";
 	import { siteUrl } from "$lib/site";
+	import CvMarker from "./cv-marker.svelte";
 	import type { PageProps } from "./$types";
 
 	/* A one-page A4 CV built from the same data as the site. It is not linked or
@@ -41,23 +42,6 @@
 		return { color, path: `M${points.map(([x, y]) => `${x} ${y}`).join(" L")} Z` };
 	});
 
-	/* The marker's slashes as real shapes: PDF viewers such as pdf.js draw CSS
-	   gradient patterns as a solid bar. Units are tenths of a millimetre; the run is
-	   long enough for the widest column and gets clipped on the right. */
-	const tickCount = 80;
-	const tickPitch = 20;
-	const tickInk = 2.5;
-	const tickHeight = 28;
-	const tickLean = tickHeight * Math.tan((28 * Math.PI) / 180);
-	const ticks = Array.from({ length: tickCount }, (_, index) => {
-		const x = index * tickPitch;
-		return {
-			path: `M${x} ${tickHeight} L${x + tickInk} ${tickHeight} L${x + tickInk + tickLean} 0 L${x + tickLean} 0 Z`,
-			/* the run fades in from the left, as it does on the site */
-			opacity: Math.min(1, (index + 1) / 7),
-		};
-	});
-
 	let email = $state("");
 	let ready = $state(false);
 
@@ -85,6 +69,8 @@
 		);
 		icons = Object.fromEntries(entries);
 		await document.fonts.ready;
+		// marker runs size themselves from their measured width, one frame after layout
+		await new Promise((settled) => requestAnimationFrame(() => requestAnimationFrame(settled)));
 		/* the print script waits for this before measuring and printing */
 		ready = true;
 	});
@@ -94,18 +80,6 @@
 	<title>{m.cv_title()}</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
-
-{#snippet marker(label: string)}
-	<h2 class="marker">
-		<span class="marker-label">{label}</span>
-		<svg class="marker-ticks" viewBox="0 0 {tickCount * tickPitch} {tickHeight}" preserveAspectRatio="xMinYMid slice" aria-hidden="true">
-			{#each ticks as tick (tick.path)}
-				<path d={tick.path} fill-opacity={tick.opacity} />
-			{/each}
-		</svg>
-		<span class="marker-accents" aria-hidden="true"><i class="blue"></i><i class="orange"></i></span>
-	</h2>
-{/snippet}
 
 {#snippet tags(skills: string[] | undefined)}
 	{#if skills?.length}
@@ -130,7 +104,7 @@
 			<strong>{localize(experience.title)}</strong>
 			<span class="at">@</span>
 			{localize(experience.institution)}
-			<span class="dash">—</span>
+			<span class="dash">·</span>
 			<span class="muted">{experience.location}</span>
 		</p>
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -- the markup comes from our own message files -->
@@ -140,7 +114,7 @@
 	<div class="columns">
 		<aside class="side">
 			<section>
-				{@render marker(m.cv_contact())}
+				<CvMarker label={m.cv_contact()} />
 				<dl class="contact">
 					<dt class="group-label">{m.cv_email()}</dt>
 					<dd><a href="mailto:{email}">{email}</a></dd>
@@ -152,7 +126,7 @@
 			</section>
 
 			<section>
-				{@render marker(m.cv_languages())}
+				<CvMarker label={m.cv_languages()} />
 				<ul class="plain">
 					<li>{m.cv_language_french()}</li>
 					<li>{m.cv_language_english()}</li>
@@ -160,7 +134,7 @@
 			</section>
 
 			<section>
-				{@render marker(m.cv_skills())}
+				<CvMarker label={m.cv_skills()} />
 				{#each skillGroups as group (group.skills)}
 					<p class="group-label">{group.label()}</p>
 					<ul class="skills">
@@ -176,7 +150,7 @@
 			</section>
 
 			<section>
-				{@render marker(m.formation_title())}
+				<CvMarker label={m.formation_title()} />
 				{#each education as degree (degree.id)}
 					<div class="entry compact">
 						<h3>{localize(degree.title)}</h3>
@@ -186,7 +160,7 @@
 			</section>
 
 			<section>
-				{@render marker(m.personal_title())}
+				<CvMarker label={m.personal_title()} />
 				{#each personalProjects as project (project.id)}
 					<div class="entry compact">
 						<h3>{localize(project.name)}</h3>
@@ -199,7 +173,7 @@
 
 		<main class="main">
 			<section>
-				{@render marker(m.current_title())}
+				<CvMarker label={m.current_title()} />
 				<div class="entry">
 					<div class="entry-head">
 						<h3>{localize(experience.title)} <span class="at">@</span> {localize(experience.institution)}</h3>
@@ -244,7 +218,7 @@
 			</section>
 
 			<section>
-				{@render marker(m.previous_title())}
+				<CvMarker label={m.previous_title()} />
 				{#each internships as internship (internship.id)}
 					<div class="entry">
 						<div class="entry-head">
@@ -316,7 +290,6 @@
 	}
 
 	h1,
-	h2,
 	h3,
 	h4,
 	p,
@@ -400,50 +373,6 @@
 		gap: 5.4mm;
 	}
 
-	/* the site's section marker, with the section name where the index sits */
-	.marker {
-		display: flex;
-		align-items: center;
-		gap: 2.5mm;
-		margin-bottom: 2.6mm;
-		color: var(--cv-strong);
-		font-size: 7.6pt;
-		font-weight: 700;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-	}
-
-	.marker-ticks {
-		/* zero width, so its 80-tick drawing never widens the column: it only fills
-		   the space left and is clipped by the slice */
-		flex: 1 1 0;
-		width: 0;
-		min-width: 0;
-		height: 2.8mm;
-		fill: var(--cv-tick);
-	}
-
-	.marker-accents {
-		display: flex;
-		gap: 1.3mm;
-		height: 2.8mm;
-		padding-right: 1mm;
-
-		i {
-			width: 1mm;
-			height: 100%;
-			transform: skewX(-28deg);
-		}
-
-		.blue {
-			background: #55b3b2;
-		}
-
-		.orange {
-			background: #ee8c0f;
-		}
-	}
-
 	.plain {
 		display: grid;
 		gap: 0.8mm;
@@ -484,6 +413,9 @@
 			width: 3.2mm;
 			height: 3.2mm;
 			color: var(--cv-accent);
+			/* Poppins sits high in its line box (deep descent), so centring on the line
+			   leaves the icon low: lift it onto the letters' optical centre */
+			transform: translateY(-0.35mm);
 
 			:global(svg) {
 				display: block;

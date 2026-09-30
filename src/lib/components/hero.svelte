@@ -33,7 +33,7 @@
 				</span>
 			</span>
 			<span class="place">
-				<span class="separator">&mdash;</span>
+				<span class="separator">·</span>
 				<span class="location">{experience.location}</span>
 			</span>
 		</div>

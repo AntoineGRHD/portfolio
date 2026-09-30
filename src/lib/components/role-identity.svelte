@@ -4,7 +4,7 @@
 	import PeriodStamp from "$lib/components/period-stamp.svelte";
 
 	/* One presentation for every held role — current or past: the period stamp in
-	   the left column, then "role @ organization — location" above a short summary.
+	   the left column, then "role @ organization · location" above a short summary.
 	   `prominent` only scales it up for the current role. */
 	let {
 		anchor,
@@ -47,7 +47,7 @@
 			</span>
 			{#if location}
 				<span class="place">
-					<span class="separator" aria-hidden="true">—</span>
+					<span class="separator" aria-hidden="true">·</span>
 					<span class="location">{location}</span>
 				</span>
 			{/if}
